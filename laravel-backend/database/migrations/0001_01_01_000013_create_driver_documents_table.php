@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('driver_documents', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->string('driver_id');
+            $table->string('name');
+            $table->string('type')->nullable();
+            $table->string('path')->nullable();
+            $table->dateTime('uploaded_at')->nullable();
+            $table->text('notes')->nullable();
+            $table->json('data')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('driver_documents');
+    }
+};

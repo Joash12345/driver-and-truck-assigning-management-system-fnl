@@ -1,0 +1,244 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 210 90% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 84% 48%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 223 57% 13%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 212 100% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 211 58% 23%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 211 58% 23%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Status colors */
+    --status-available: 142 71% 45%;
+    --status-intransit: 217 91% 60%;
+    --status-pending: 37 96% 55%;
+    --status-maintenance: 0 84% 60%;
+    --status-assigned: 238 66% 45%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 90% 50%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 18%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 213 27% 84%;
+
+    --sidebar-background: 223 57% 13%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 212 100% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 211 58% 23%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 211 58% 23%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  h5 {
+    @apply text-lg;
+  }
+
+  /* Transition defaults */
+  a, button {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md shadow-glass rounded-lg border border-white/20 transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    @apply shadow-glass-hovered;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors;
+  }
+
+  .status-badge-available {
+    @apply bg-status-available/10 text-status-available;
+  }
+
+  .status-badge-intransit {
+    @apply bg-status-intransit/10 text-status-intransit;
+  }
+
+  .status-badge-pending {
+    @apply bg-status-pending/10 text-status-pending;
+  }
+
+  .status-badge-maintenance {
+    @apply bg-status-maintenance/10 text-status-maintenance;
+  }
+
+  .status-badge-assigned {
+    background-color: hsl(var(--status-assigned) / 0.1);
+    color: hsl(var(--status-assigned));
+  }
+
+  .page-transition {
+    @apply animate-fade-in;
+  }
+
+  .notification-dot {
+    @apply absolute top-1 right-1 w-2 h-2 bg-status-pending rounded-full animate-pulse-soft;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Content load animations */
+.content-fade-in > * {
+  @apply opacity-0;
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.content-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
+.content-fade-in > *:nth-child(2) { animation-delay: 0.2s; }
+.content-fade-in > *:nth-child(3) { animation-delay: 0.3s; }
+.content-fade-in > *:nth-child(4) { animation-delay: 0.4s; }
+.content-fade-in > *:nth-child(5) { animation-delay: 0.5s; }
+.content-fade-in > *:nth-child(6) { animation-delay: 0.6s; }
+.content-fade-in > *:nth-child(7) { animation-delay: 0.7s; }
+.content-fade-in > *:nth-child(8) { animation-delay: 0.8s; }
+.content-fade-in > *:nth-child(9) { animation-delay: 0.9s; }
+.content-fade-in > *:nth-child(10) { animation-delay: 1.0s; }
+
+/* Map marker pin styles */
+.truck-pin .truck-pin-inner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 28px;
+  font-size: 11px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* Pin bounce animation for device markers */
+@keyframes device-bounce {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+.device-pin-bounce {
+  display: inline-block;
+  transform-origin: center bottom;
+  animation: device-bounce 1.6s ease-in-out infinite;
+}
+

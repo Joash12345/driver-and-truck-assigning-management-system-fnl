@@ -1,0 +1,13 @@
+$env:WS_PORT=8083; node .\dev-scripts\ws-stub.cjs
+$env:VITE_WS_URL='ws://192.168.1.55:8083'; npm run dev
+
+
+# Local only
+$env:VITE_WS_URL='ws://localhost:8083'; npm run dev
+
+# Or reachable on LAN (replace IP with your machine's): 
+$env:VITE_WS_URL='ws://192.168.1.55:8083'; npm run dev -- --host
+
+
+$env:VITE_WS_URL='ws://192.168.1.55:8084'; npm run dev -- --host
+$env:WS_PORT=8084; node .\dev-scripts\ws-stub.cjs
